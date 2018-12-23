@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 21, 2015 8:45:17 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="pmo.gp.beans.Reunion" table="REUNION">
+        <id name="idreunion" type="int">
+            <column name="IDREUNION" />
+            <generator class="increment" />
+        </id>
+        <property name="datereunion" type="java.util.Date">
+            <column name="DATEREUNION" />
+        </property>
+        <property name="ordre" type="java.lang.String">
+            <column name="ORDRE" />
+        </property>
+        <property name="endroit" type="java.lang.String">
+            <column name="ENDROIT" />
+        </property>
+        <one-to-one name="compterendu" class="pmo.gp.beans.CompteRendu"></one-to-one>
+        <many-to-one name="projet" class="pmo.gp.beans.Projet" fetch="join">
+            <column name="MATRICULE" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

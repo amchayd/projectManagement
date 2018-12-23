@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 21, 2015 8:45:17 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="pmo.gp.beans.CompteRendu" table="COMPTERENDU">
+        <id name="idreunion" type="int">
+            <column name="IDREUNION" />
+            <generator class="foreign">
+		<param name="property">reunion</param>
+            </generator>
+        </id>
+        <one-to-one name="reunion" class="pmo.gp.beans.Reunion" constrained="true"></one-to-one>
+        <property name="datecreation" type="java.util.Date">
+            <column name="DATECREATION" />
+        </property>
+        <property name="ordre" type="java.lang.String">
+            <column name="ORDRE" />
+        </property>
+        <many-to-one name="chefprojet" class="pmo.gp.beans.ChefProjet" fetch="join">
+            <column name="CHEFPROJET" />
+        </many-to-one>
+        <property name="commentairechefprojet" type="java.lang.String">
+            <column name="COMMENTAIRECHEFPROJET" />
+        </property>
+        <property name="valide" type="boolean">
+            <column name="VALIDE" />
+        </property>
+    </class>
+</hibernate-mapping>

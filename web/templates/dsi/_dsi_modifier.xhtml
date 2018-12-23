@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">    
+                        <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="box">
+                              <!-- DETAIL PROJET -->
+                        <h:form>
+                        <div class="modal-body">
+                            <div class="taches-lebelle">MODIFIER LE PROJET</div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Matricule:</span>
+                                    <div class="form-control" >#{PrjsAction.selectedProjet.matricule}</div>
+                                    <h:inputHidden value="#{PrjsAction.selectedProjet.matricule}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Intitulé:</span>
+                                    <h:inputText value="#{PrjsAction.selectedProjet.intitule}" styleClass="form-control" pt:placeholder="Intitulé projet"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Sponsor:</span>
+                                    <h:inputText value="#{PrjsAction.selectedProjet.sponsor}" class="form-control" pt:placeholder="Sponsor projet"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Budget:</span>
+                                    <h:inputText value="#{PrjsAction.selectedProjet.budget}" class="form-control" pt:placeholder="Budget projet"/>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Chef Projet:</span>
+                                    <h:selectOneMenu value="#{PrjsAction.idChefProjet}" styleClass="form-control">
+                                        <c:forEach items='#{PrjsAction.getListeChef()}' var="cp"> 
+                                          <f:selectItem itemValue="#{cp.id}" itemLabel="#{cp.nom} #{cp.prenom}" />
+                                        </c:forEach>
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Direction responsable:</span>
+                                    <h:selectOneMenu value="#{PrjsAction.idDirection}" styleClass="form-control">
+                                        <c:forEach items='#{PrjsAction.getListeDirection()}' var="dr"> 
+                                          <f:selectItem itemValue="#{dr.id}" itemLabel="#{dr.intitule}" />
+                                        </c:forEach>
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>                                            
+                            </div>
+                        <div class="modal-footer clearfix">
+                            <h:commandButton value="Enregistrer" class="btn btn-primary pull-left" action="#{PrjsAction.SaveModificationProjet}"/>
+                        </div>
+                        </h:form>
+                            </div>
+                            <!-- /.modal-content -->
+                            <!-- /DETAIL PROJET -->
+                            </div><!-- /.box -->
+                    </div>
+                       
+                </section>
+</ui:composition>

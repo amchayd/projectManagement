@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 21, 2015 8:45:17 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="pmo.gp.beans.Etape" table="ETAPE">
+        <id name="code" type="java.lang.String">
+            <column name="CODE" />
+        </id>
+        <property name="description" type="java.lang.String">
+            <column name="DESCRIPTION" />
+        </property>
+        <property name="datedebut" type="java.util.Date">
+            <column name="DATEDEBUT" />
+        </property>
+        <property name="datefin" type="java.util.Date">
+            <column name="DATEFIN" />
+        </property>
+        <property name="duree" type="int">
+            <column name="DUREE" />
+        </property>
+        <property name="niveau" type="java.lang.String">
+            <column name="NIVEAU" />
+        </property>
+        <property name="prochaineetape" type="java.lang.String">
+            <column name="PROCHAINEETAPE" />
+        </property>
+        <property name="pourcentage" type="int">
+            <column name="POURCENTAGE" />
+        </property>
+        <many-to-one name="projet" class="pmo.gp.beans.Projet" fetch="join">
+            <column name="MATRICULE" />
+        </many-to-one>
+        <set name="problemes" table="PROBLEME" inverse="false" lazy="true">
+            <key>
+               <column name="ETAPES" />
+            </key>
+            <one-to-many class="pmo.gp.beans.Probleme" />
+        </set>
+    </class>
+</hibernate-mapping>

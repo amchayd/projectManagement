@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 21, 2015 8:45:17 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="pmo.gp.beans.ConnaissanceTechnique" table="CONNAISSANCETECHNIQUE">
+        <id name="idct" type="int">
+            <column name="IDCT" />
+            <generator class="increment" />
+        </id>
+        <property name="libelle" type="java.lang.String">
+            <column name="LIBELLE" />
+        </property>
+        <!--<set name="chefsprojet" table="CHEFPROJET" inverse="false">
+            <key>
+                <column name="IDCT" />
+            </key>
+            <many-to-many entity-name="pmo.gp.beans.ChefProjet">
+                <column name="ID" not-null="true" />
+            </many-to-many>
+             <one-to-many class="pmo.gp.beans.ChefProjet" /> 
+        </set>-->
+        <set name="chefsprojet" table="conntechq_chefprojet" inverse="false" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="IDCT" />
+            </key>
+            <many-to-many column="ID" class="pmo.gp.beans.ChefProjet">
+           </many-to-many>
+            </set>
+    </class>
+</hibernate-mapping>

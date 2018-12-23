@@ -1,0 +1,71 @@
+<ui:composition
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<!-- CREER NOUVEAU PROJET -->
+        <div class="modal fade" id="compose-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                        <h4 class="modal-title"><i class="fa fa-plus"></i> Créer nouveau projet</h4>
+                    </div>
+                      <h:form class="login_form">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Matricule:</span>
+                                    <h:inputText value="#{CreerProjetAction.matricule}" class="form-control" pt:placeholder="Matricule projet"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Intitulé:</span>
+                                    <h:inputText value="#{CreerProjetAction.intitule}" class="form-control" pt:placeholder="Intitulé projet"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Sponsor:</span>
+                                    <h:inputText value="#{CreerProjetAction.sponsor}" class="form-control" pt:placeholder="Sponsor projet"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Budget:</span>
+                                    <h:inputText value="#{CreerProjetAction.budget}" class="form-control" pt:placeholder="Budget projet"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Chef Projet:</span>                             
+                                    <h:selectOneMenu value="#{CreerProjetAction.chefprojet}" styleClass="form-control">
+                                        <c:forEach items='#{PrjsAction.getListeChef()}' var="cp">
+                                            <f:selectItem itemValue="#{cp.id}" itemLabel="#{cp.nom} #{cp.prenom}" />
+                                        </c:forEach>
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Direction responsable:</span>
+                                    <h:selectOneMenu value="#{CreerProjetAction.direction}" styleClass="form-control">
+                                        <c:forEach items='#{PrjsAction.getListeDirection()}' var="dr"> 
+                                          <f:selectItem itemValue="#{dr.id}" itemLabel="#{dr.intitule}" />
+                                        </c:forEach>
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer clearfix">
+                            <h:commandButton value="Enregistrer" class="btn btn-primary pull-left" action="#{CreerProjetAction.creerProjet}"/>
+                        </div>
+                      </h:form>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+         <!-- /CREER NOUVEAU PROJET -->
+</ui:composition>

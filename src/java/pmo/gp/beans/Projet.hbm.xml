@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 21, 2015 8:45:17 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="pmo.gp.beans.Projet" table="PROJET">
+        <id name="matricule" type="java.lang.String">
+            <column name="MATRICULE" />
+        </id>
+        <property name="intitule" type="java.lang.String">
+            <column name="INTITULE" />
+        </property>
+        <many-to-one name="directionresponsable" class="pmo.gp.beans.Direction" fetch="join">
+            <column name="DIRECTIONRESPONSABLE" />
+        </many-to-one>
+        <property name="budget" type="double">
+            <column name="BUDGET" />
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="DESCRIPTION" />
+        </property>
+        <property name="datecreation" type="java.util.Date">
+            <column name="DATECREATION" />
+        </property>
+        <property name="prevudebut" type="java.util.Date">
+            <column name="PREVUDEBUT" />
+        </property>
+        <property name="prevufin" type="java.util.Date">
+            <column name="PREVUFIN" />
+        </property>
+        <property name="sponsor" type="java.lang.String">
+            <column name="SPONSOR" />
+        </property>
+        <property name="commenatairechefprojet" type="java.lang.String">
+            <column name="COMMENATAIRECHEFPROJET" />
+        </property>
+        <property name="valide" type="boolean">
+            <column name="VALIDE" />
+        </property>
+        <property name="priorite" type="java.lang.String">
+            <column name="PRIORITE" />
+        </property>
+        <many-to-one name="chefprojet" class="pmo.gp.beans.ChefProjet" fetch="join">
+            <column name="CHEFPROJET" />
+        </many-to-one>
+        <set name="documents" table="DOCUMENT" inverse="false" lazy="true">
+            <key>
+                <column name="MATRICULE" />
+            </key>
+            <one-to-many class="pmo.gp.beans.Document" />
+        </set>
+        <set name="reunions" table="REUNION" inverse="false" lazy="true">
+            <key>
+                <column name="MATRICULE" />
+            </key>
+            <one-to-many class="pmo.gp.beans.Reunion" />
+        </set>
+        <set name="etapes" table="ETAPE" inverse="false" lazy="true">
+            <key>
+                <column name="MATRICULE" />
+            </key>
+            <one-to-many class="pmo.gp.beans.Etape" />
+        </set>
+    </class>
+</hibernate-mapping>

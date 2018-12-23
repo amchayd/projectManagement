@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:insert name="head1" >
+        <ui:include src="_style.xhtml"/>
+    </ui:insert>
+    <h:body class="skin-blue">
+        <ui:insert>
+         <ui:include src="templates/commun/_header.xhtml"/> 
+        </ui:insert>
+                               <c:choose>
+                            <c:when test='#{sessionScope["usertype"] eq "DSI"}'>
+                                <ui:insert>
+                              <ui:include src="templates/dsi/_dsi_tools.xhtml"/>
+                              </ui:insert>
+                            </c:when>
+                           <c:when test='#{sessionScope["usertype"] eq "CHEFPROJET"}'>
+                               <ui:insert>
+                                   <ui:include src="templates/chefprojet/_cp_tools.xhtml"/>
+                                </ui:insert>
+                            </c:when>
+                           <c:otherwise>
+                  <p>some.test is not true</p>
+                          </c:otherwise> 
+                             </c:choose>
+                        <!-- Main content -->
+                <aside class="right-side">  
+                    <ui:insert>
+                    <ui:include src="templates/commun/_content_header.xhtml" />
+                    </ui:insert>
+                <section class="content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="box">
+        <!-- DETAIL PROJET -->
+                <h:form class="SubmitNextDetaillerProjet">
+                        <div class="modal-body">
+                            <div class="taches-lebelle">DETAILLER LE PROJET</div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Matricule:</span>
+                                    <div class="form-control" ><h:outputText value="#{PrjsAction.selectedProjet.matricule}"/></div>
+                                    <h:inputHidden value="#{PrjsAction.selectedProjet.matricule}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Intitulé:</span>
+                                    <div class="form-control" ><h:outputText value="#{PrjsAction.selectedProjet.intitule}" pt:placeholder="Intitulé projet" /></div>                                
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Budget:</span>
+                                    <h:inputText class="form-control" value="#{PrjsAction.selectedProjet.budget}" pt:placeholder="Budget projet"/>                              
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Description:</span>
+                                    <h:inputTextarea class="form-control" value="#{PrjsAction.selectedProjet.description}" pt:placeholder="Description projet"/>     
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Date de début prévue:</span>
+                                    <p:calendar value="#{PrjsAction.selectedProjet.prevudebut}" styleClass="form-control" locale="tr" navigator="true" pattern="yyyy-MM-dd" />                          
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Date de fin prévue:</span>
+                                   <p:calendar value="#{PrjsAction.selectedProjet.prevufin}" styleClass="form-control" locale="tr" navigator="true" pattern="yyyy-MM-dd" />                                                       
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">commentaire du chef de projet:</span>
+                                    <h:inputTextarea class="form-control" value="#{PrjsAction.selectedProjet.commenatairechefprojet}" pt:placeholder="Commenataire chefprojet projet"/>     
+                                </div>
+                            </div>
+
+                                
+                            </div>
+                        <div class="modal-footer clearfix">
+                            <h:commandLink value="Suivant" class="btn btn-primary pull-left" action="#{PrjsAction.SubmitDetaillerProjet()}"/>
+                        </div>
+                </h:form>
+         <!-- /DETAIL PROJET -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                </aside>    
+    </h:body>
+</html>

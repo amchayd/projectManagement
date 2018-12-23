@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:insert name="head1" >
+        <ui:include src="_style.xhtml"/>
+    </ui:insert>
+    <h:body class="skin-blue">
+        <ui:insert>
+         <ui:include src="templates/commun/_header.xhtml"/>
+        </ui:insert>
+       <c:choose>
+    <c:when test='#{sessionScope["usertype"] eq "DSI"}'>
+        <ui:insert name="dsitools" >
+         <ui:include src="templates/dsi/_dsi_tools.xhtml"/>
+        </ui:insert>
+    </c:when>
+    <c:when test='#{sessionScope["usertype"] eq "CHEFPROJET"}'>
+        <ui:insert>
+         <ui:include src="templates/chefprojet/_cp_tools.xhtml"/>
+        </ui:insert>
+    </c:when>
+    <c:otherwise>
+        <p>some.test is not true</p>
+    </c:otherwise> 
+</c:choose>
+        <aside class="right-side">   
+            <ui:insert>
+                        <ui:include src="templates/commun/_content_header.xhtml" />
+            </ui:insert>
+                        <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="box">
+                                
+<h:form id="form"> 
+    <p:dataTable emptyMessage="Pas de Réunion" styleClass="DataTable"  id="ReunionTable" var="reunion" value='#{ReunAction.listreunions}' rows="12" paginator="true"
+                 rowKey="#{projet.matricule}"
+                 paginatorPosition="bottom" >  
+        <p:column style="min-width:50px; max-width:50px;" headerText="Matricule Projet" >
+            <h:outputText value="#{reunion.projet.matricule}" escape="false" />
+        </p:column>
+        <p:column style="min-width:10px;max-width:220px;" headerText="Date et hour">  
+            <h:outputText value="#{reunion.datereunion}" escape="false" />
+        </p:column> 
+        <p:column styleClass="subject" style="max-width:10px; max-width:50px;" headerText="Endroit">  
+            <h:outputText value="#{reunion.endroit}"  />  
+        </p:column>
+        <p:column styleClass="subject" style="max-width:50px; max-width:300px;" headerText="Ordre">  
+            <h:outputText value="#{reunion.ordre}"  />  
+        </p:column> 
+        <p:column style="max-width:34px;" > 
+            <p:commandLink action="1" title="Annuler cette réunion">
+                <i class="fa fa-times oprs cancelre"><span>Annuler</span></i>
+           </p:commandLink>
+            <p:commandLink action="1" title="compte rendu">
+                <i class="fa fa-plus oprs addcp"><span>Compte Rendu</span></i>
+           </p:commandLink>
+            <p:commandLink  update=":form:modifierR" title="Modifier" oncomplete="PF('reunDialog').show()" >
+               <i class="fa fa-pencil-square-o oprs modifier"></i>
+               <f:setPropertyActionListener value="#{reunion}" target="#{ReunAction.selectedReunion}" />
+           </p:commandLink>    
+        </p:column>
+    </p:dataTable> 
+    <p:dialog id="modifierR" header="Modifier Réunion" widgetVar="reunDialog"  modal="true" showEffect="fade" hideEffect="fade" resizable="false" draggable="false" > 
+        <p:outputPanel style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty ReunAction.selectedReunion}" columnClasses="label,value">
+                <h:outputText value="Matricule:" />
+                <h:outputText value="#{ReunAction.selectedReunion.projet.matricule}" class="form-control"  />
+               
+                <h:outputText value="Date Réunion:" />
+                <p:calendar value="#{ReunAction.selectedReunion.datereunion}" styleClass="form-control" locale="tr" navigator="true" pattern="yyyy-MM-dd" />                                                       
+
+ 
+                <h:outputText value="Endroit:" />
+                <h:inputText value="#{ReunAction.selectedReunion.endroit}" pt:placeholder="Endroit" class="form-control"  />
+ 
+                <h:outputText value="Ordre:" />
+                <h:inputTextarea value="#{ReunAction.selectedReunion.ordre}" pt:placeholder="Ordre" class="form-control" style="resize: none" />
+                <h:inputHidden value="#{ReunAction.selectedReunion.projet.matricule}"/>
+                <h:inputHidden value="#{ReunAction.selectedReunion.idreunion}"/>
+                
+                <p:commandLink action="#{ReunAction.ModifierReunion()}" update=":form:modifierR" styleClass="btn btn-primary pull-left" >
+                Modifier
+                </p:commandLink>    
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+    
+</h:form>                       
+                                
+                            </div><!-- /.box -->
+                        </div>
+                       
+                    </div>
+                </section>
+            </aside>
+    </h:body>
+</html>

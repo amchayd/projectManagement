@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<header class="header">
+            <a href="#" class="logo">
+                <!-- Add the class icon to your logo image or logo icon to add the margining -->
+     #{sessionScope["usertype"]}
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+                        <li class="dropdown messages-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bell"></i>
+                                <span class="label label-success nbrnotification">
+                                  
+                                    #{PrjsAction.getCountNouveauxProjets()}              
+                                  
+                                     
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <c:if test="#{PrjsAction.getCountNouveauxProjets()!=0}" >
+                                <li class="header">Vous avez #{PrjsAction.getCountNouveauxProjets()} nouveaux Projets</li>
+                                </c:if>
+                                <li>
+                                    <!-- inner menu: contains the actual data -->
+                                    <ul class="menu">
+                                        <c:forEach items="#{PrjsAction.getListenvprojets()}" var="p">
+                                        <li><!-- start message -->
+                                            <a href="#">
+                                                <h4>
+                                                    <h:outputText value="#{p.matricule}"/>
+                                                    <small><i class="fa fa-clock-o"></i> 
+                                                        <h:outputText value="#{p.datecreation.toString().split(' ')[0]}" />
+                                                    </small>
+                                                </h4>
+                                                <p>
+                                                    <h:outputText value="#{p.intitule}" styleClass="inttlnots" />
+                                                </p>
+                                            </a>
+                                        </li><!-- end message -->      
+                                        </c:forEach>
+                                    </ul>
+                                </li>                           
+                            </ul>
+                             
+                        </li>
+                        <!-- Tasks: style can be found in dropdown.less -->
+                     
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <span>#{sessionScope["username"]}<i class="caret"></i></span>
+                            </a>  
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header bg-light-blue">
+                                    <p>
+                                      #{sessionScope["username"]} - #{sessionScope["usertype"]}
+                                    </p>
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <h:form>
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profil</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <h:commandLink action="#{LoginAction.logout()}"  styleClass="btn btn-default btn-flat">Se deconnecter</h:commandLink>
+                                    </div>
+                                    </h:form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+</ui:composition>

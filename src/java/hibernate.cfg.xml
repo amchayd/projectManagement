@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory name="gpSessionFactory">
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.password"/>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/gp</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="show_sql">true</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <!-- <property name="current_session_context_class">thread</property>
+  <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>-->
+    <mapping resource="/pmo/gp/beans/ChefProjet.hbm.xml"/>
+    <mapping resource="/pmo/gp/beans/CompteRendu.hbm.xml"/>
+    <mapping resource="/pmo/gp/beans/ConnaissanceTechnique.hbm.xml"/>
+    <mapping resource="/pmo/gp/beans/Direction.hbm.xml"/>
+    <mapping resource="/pmo/gp/beans/Document.hbm.xml"/>
+    <mapping resource="/pmo/gp/beans/DSI.hbm.xml"/>
+    <mapping resource="/pmo/gp/beans/Etape.hbm.xml"/>
+    <mapping resource="/pmo/gp/beans/Probleme.hbm.xml"/>
+    <mapping resource="/pmo/gp/beans/Projet.hbm.xml"/>
+    <mapping resource="/pmo/gp/beans/Reunion.hbm.xml"/>
+    <mapping resource="/pmo/gp/beans/Role.hbm.xml"/>
+    <mapping resource="/pmo/gp/beans/Utilisateur.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<!-- ./wrapper -->
+         <div class="wrapper row-offcanvas row-offcanvas-left">
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="left-side sidebar-offcanvas">                
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- search form -->
+                    <form action="#" method="get" class="sidebar-form">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Search..."/>
+                            <span class="input-group-btn">
+                                <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </form>
+                    <!-- /.search form -->
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu">
+                           <h:form styleClass="hform"> 
+                               <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-table"></i> <span>Mes Projets</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">  
+                                        <li>
+                                            <h:commandLink styleClass="list_projets" action="#{PrjsAction.listerProjet(5)}">
+                                               <i class="fa fa-angle-double-right"></i>Projets en cours
+                                           </h:commandLink>
+                                        </li>
+                                        <li>
+                                            <h:commandLink styleClass="list_projets" action="#{PrjsAction.listerProjet(4)}">
+                                               <i class="fa fa-angle-double-right"></i>Projets terminé
+                                           </h:commandLink>
+                                        </li>
+                                        <li><h:commandLink styleClass="list_projets" action="#{PrjsAction.listerProjet(6)}">
+                                               <i class="fa fa-angle-double-right"></i>Nouveaux Projets
+                                           </h:commandLink>
+                                        </li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <h:commandLink styleClass="list_projets" action="#{PrjsAction.getStatistique}">
+                                <i class="fa fa-bar-chart-o"></i>
+                                <span>Statistique</span>
+                               
+                            </h:commandLink>
+                        </li>
+                                <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-briefcase"></i> <span>Réunion</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li>
+                                    <h:commandLink styleClass="list_projets" action="#{ReunAction.getReunions()}">
+                                               <i class="fa fa-angle-double-right"></i>Réunions
+                                           </h:commandLink>
+                                </li>
+                                <li>
+                                            <h:commandLink styleClass="list_projets" action="9">
+                                               <i class="fa fa-angle-double-right"></i>Organiser Réunion
+                                           </h:commandLink>
+                                </li>
+                                <li>
+                                            <h:commandLink styleClass="list_projets" action="9">
+                                               <i class="fa fa-angle-double-right"></i>Compte Rendu validé
+                                           </h:commandLink>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <h:commandLink immediate="true" action="3" >
+                                <i class="fa fa-book"></i>
+                                <span>Rapport</span>
+                            </h:commandLink>
+                        </li>
+                          
+                           </h:form>
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+         </div>
+</ui:composition>

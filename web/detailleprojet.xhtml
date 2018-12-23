@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+   <ui:insert name="head1" >
+        <ui:include src="_style.xhtml"/>
+    </ui:insert>
+    <h:body class="skin-blue">
+        <ui:insert>
+         <ui:include src="templates/commun/_header.xhtml"/> 
+        </ui:insert>
+                               <c:choose>
+                            <c:when test='#{sessionScope["usertype"] eq "DSI"}'>
+                                <ui:insert>
+                              <ui:include src="templates/dsi/_dsi_tools.xhtml"/>
+                                </ui:insert>
+                            </c:when>
+                           <c:when test='#{sessionScope["usertype"] eq "CHEFPROJET"}'>
+                               <ui:insert>
+                                <ui:include src="templates/chefprojet/_cp_tools.xhtml"/>
+                               </ui:insert>
+                            </c:when>
+                           <c:otherwise>
+                  <p>some.test is not true</p>
+                          </c:otherwise> 
+                             </c:choose>
+                        <!-- Main content -->
+                <aside class="right-side">  
+                    <ui:insert>
+                    <ui:include src="templates/commun/_content_header.xhtml" />
+                    </ui:insert>
+                <section class="content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="box">
+                        <!-- DETAIL PROJET -->
+                        <div class="modal-body">
+                            <div class="taches-lebelle">INFORMATIONS SUR LE PROJET</div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Matricule:</span>
+                                    <div class="form-control" >#{PrjsAction.selectedProjet.matricule}</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Intitulé:</span>
+                                    <div class="form-control" >#{PrjsAction.selectedProjet.intitule}</div>                                
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Chef projet:</span>
+                                    <div class="form-control" >#{PrjsAction.selectedProjet.chefprojet.nom} #{PrjsAction.selectedProjet.chefprojet.prenom} </div>                                
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Direction respoansable:</span>
+                                    <div class="form-control" >#{PrjsAction.selectedProjet.directionresponsable.intitule}</div>                                
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Budjet:</span>
+                                    <div class="form-control" >#{PrjsAction.selectedProjet.budget}</div>                                
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Description:</span>
+                                    <div class="form-control" >#{PrjsAction.selectedProjet.description}</div>                                
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Date de création:</span>
+                                    <div class="form-control" >#{PrjsAction.selectedProjet.datecreation}</div>                                
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Date de début prévue:</span>
+                                    <div class="form-control" >#{PrjsAction.selectedProjet.prevudebut}</div>                                
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Date de fin prévue:</span>
+                                    <div class="form-control" >#{PrjsAction.selectedProjet.prevufin}</div>                                
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Sponsor:</span>
+                                    <div class="form-control" >#{PrjsAction.selectedProjet.sponsor}</div>                                
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">commentaire du chef de projet:</span>
+                                    <div class="form-control" >#{PrjsAction.selectedProjet.commenatairechefprojet}</div>                                
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Validité:</span>
+                                    <div class="form-control" >#{PrjsAction.selectedProjet.valide}</div>                                
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Priorité:</span>
+                                    <div class="form-control" >#{PrjsAction.selectedProjet.priorite}</div>                                
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer clearfix taches-div">
+                            <div class="taches-lebelle">LES TACHES DU PROJET</div>
+                       
+                            <c:forEach items="#{PrjsAction.listeEtape}" var="etp">
+                          <div class="widget widget-warning widget-small">
+                    <div class="media innerAll half">
+                        <div class="pull-right text-right">
+                            <span class="label label-warning">#{etp.pourcentage}%</span>
+                        <div class="strong text-muted innerT half">
+                            Niveau : #{etp.niveau}
+                        </div>
+                        <div class="strong text-muted innerT half">
+                            Duree : #{etp.duree}jrs
+                        </div>
+                    </div>
+                    <div class="media-body pull-left">
+                        <span class="content-tache"><span class="code-tache">#{etp.code}:</span>#{etp.description}</span>
+                        <div class="innerR">
+                            <span>du #{etp.datedebut.toString().split(' ')[0]} au #{etp.datefin.toString().split(' ')[0]}</span><br/>
+                        </div>
+                    </div>
+                     </div>
+                </div>
+                            </c:forEach>
+                        </div>
+         <!-- /DETAIL PROJET -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+          </aside>
+    </h:body>
+</html>

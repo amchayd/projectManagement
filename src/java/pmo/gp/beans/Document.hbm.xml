@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 21, 2015 8:45:17 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="pmo.gp.beans.Document" table="DOCUMENT">
+        <id name="nom" type="java.lang.String">
+            <column name="NOM" />
+            <generator class="increment" />
+        </id>
+        <property name="type" type="java.lang.String">
+            <column name="TYPE" />
+        </property>
+        <many-to-one name="projet" class="pmo.gp.beans.Projet" fetch="join">
+            <column name="MATRICULE" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

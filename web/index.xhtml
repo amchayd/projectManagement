@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      >
+    <ui:insert name="head" >
+        <ui:include src="_style.xhtml"/>
+    </ui:insert>
+    <h:body class="skin-blue">
+                 <div class="login_body">            
+     <div class="center_block">
+           <h:outputLabel value="Direction des Systemes d'information" class="login_logo"/>
+           <div class="login_title">S'authentifier à votre espace de travaille</div>
+           <h:form class="login_form">
+               <h:inputText value="#{LoginAction.username}" class="login_input login_username" pt:placeholder="Nom d'utilisateur"/>
+               <h:inputSecret value="#{LoginAction.password}" class="login_input login_password" pt:placeholder="Mot de passe" />
+               <div><h:selectBooleanCheckbox class="login_chkbox"/>Garder la Session</div>
+               <div><span class="err">#{LoginAction.err}</span></div>
+               <h:commandButton value="Se connecter" class="login_submit btn" action="#{LoginAction.login}"/>
+           </h:form>
+     </div>
+     </div>
+           <ui:include src="_style.xhtml"/>
+    </h:body>
+</html>
+
